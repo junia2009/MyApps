@@ -8,6 +8,9 @@
 //   tags     使っている技術など
 //   updated  最後に手を入れた月(並び順と「最近の更新」に使う)
 //   orient   'landscape' なら横持ちで遊ぶアプリ(カードに印が出る)
+//   color    CM と個人ページの差し色
+//   catch    CM と個人ページのキャッチコピー(1行)
+//   points   特長3つ(CM で1つずつ出す)
 
 export const CATEGORIES = [
   { id: 'game', label: 'ゲーム', icon: '🎮' },
@@ -28,6 +31,9 @@ export const APPS = [
     id: 'hexfrontier', name: 'Hexfrontier', cat: 'game', updated: '2026-10',
     desc: 'Three.js 製の 3D ヘックス開拓ゲーム。5種類のルールを CPU 戦と合言葉のオンライン対戦で遊べる。',
     url: GH + 'hexfrontier/', tags: ['Three.js', 'Cloudflare', 'PWA'],
+    color: '#f5c451',
+    catch: '島を拓け。ブラウザで、本格ボードゲーム。',
+    points: ['3D の島で、資源を集めて開拓', '5種類のルールと強さを選べる CPU', '合言葉ひとつで友達とオンライン対戦'],
   },
   {
     id: 'hover-dodge', name: 'HOVER DODGE', cat: 'game', updated: '2026-10',
@@ -48,6 +54,9 @@ export const APPS = [
     id: 'my_suica_game', name: 'スライム合成パズル', cat: 'game', updated: '2026-07',
     desc: 'Matter.js の物理演算で遊ぶ合成パズル。深海でスライムを合体させて最上位を目指す。',
     url: GH + 'my_suica_game/', tags: ['Matter.js', 'PWA'],
+    color: '#7dd3fc',
+    catch: 'ぶつけて、合体。深海のスライム王をめざせ。',
+    points: ['同じスライムをくっつけて進化', '物理演算で、ころころ転がる', 'ずかんを埋めるやりこみも'],
   },
   {
     id: 'My_Jigsaw_Puzzle', name: 'マイジグソーパズル', cat: 'game', updated: '2026-07',
@@ -100,6 +109,9 @@ export const APPS = [
     id: 'aquarium2', name: '大水槽 ― バーチャル水族館', cat: 'calm', updated: '2026-09',
     desc: '水の光学現象も生き物の形も泳ぎ方も、すべてコードで手続き生成した Three.js の水族館。',
     url: GH + 'aquarium2/', tags: ['Three.js', 'Vite', 'PWA'],
+    color: '#38bdf8',
+    catch: 'ぜんぶコードで描いた、水族館。',
+    points: ['光のゆらぎも魚の泳ぎも手続き生成', 'えさをまくと、魚が集まってくる', '図鑑から選んだ生き物をカメラが追う'],
   },
   {
     id: 'fire_works', name: '花火シミュレーター', cat: 'calm', updated: '2026-08',

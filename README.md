@@ -15,7 +15,8 @@
 
 1. `apps.js` の `APPS` に1件足す(書き方はファイルの先頭にある)
 2. 画面を撮って `thumbs/<id>.webp` に置く(縦横 3:4、480×640 くらい)
-3. 見出しの本数は `apps.js` の件数から自動で書き換わる
+3. `node scripts/build.mjs` を実行する。トップ・個人ページ(`apps/<id>/`)・`sitemap.xml` が書き出される
+4. CM があれば `media/<id>/` に `cm.mp4`(縦 720×1280)・`poster.jpg`・`preview.mp4`(カードの試し見)を置いて、もう一度 3 を実行する
 
 イチオシ欄は `apps.js` の `FEATURED` で選ぶ(横長の `thumbs/<id>-wide.webp` を使う)。
 Qiita の記事やプロフィールへのリンクは `main.js` の先頭(`QIITA_PROFILE` / `ARTICLES`)に書くと出る。
@@ -28,8 +29,12 @@ Qiita の記事やプロフィールへのリンクは `main.js` の先頭(`QIIT
 ```
 index.html    ページの骨組み(OGP もここ)
 style.css     見た目
-main.js       一覧の描画・絞り込み・検索
+main.js       絞り込み・検索・動き(カードや紹介文は HTML に書き出し済み)
 apps.js       載せるアプリの一覧(ここだけ触れば増やせる)
+site.js       トップ・個人ページ・生成スクリプトで共有する部品
+scripts/      ページを書き出す build.mjs
+apps/<id>/    アプリごとの紹介ページ(build.mjs が書き出す)
+media/<id>/   CM 動画など
 analytics.js  匿名のアクセス集計(GoatCounter、Cookie なし)
 thumbs/       各アプリの画面
 og.png        SNS で共有したときの画像
