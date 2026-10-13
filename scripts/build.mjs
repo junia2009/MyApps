@@ -87,11 +87,8 @@ ${sky}
   <div class="wrap">
     <p class="eyebrow">${SITE.author} の個人開発</p>
     <h1 class="title" aria-label="junia lab">${[...'junia lab'].map((ch, i) => `<span style="--i:${i}" aria-hidden="true">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('')}</h1>
-    <p class="lead">
-      ブラウザで動くアプリを <strong class="count" data-to="${APPS.length}">${APPS.length}</strong> 本作りました。
-      どれもインストールなしで、スマホからそのまま使えます。
-      気に入ったものはホーム画面に追加すると、アプリのように起動できます。
-    </p>
+    <p class="ask">今日は、<a class="ask-q" href="apps/${f.id}/" style="--c:${f.color ?? '#f5c451'}">${esc(f.ask)}</a></p>
+    <p class="lead">深海でオセロ、宇宙でソリティア、夜空に花火。<br>ぜんぶ、タップひとつで始まります。</p>
     <nav class="links">
       <a href="${SITE.github}" rel="noopener">GitHub</a>
       ${SITE.qiita ? `<a href="${SITE.qiita}" rel="noopener">Qiita</a>` : ''}

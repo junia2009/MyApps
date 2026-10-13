@@ -103,8 +103,19 @@ a { color: var(--accent); }
 }
 @keyframes pop { from { opacity: 0; transform: translateY(40px) rotate(-12deg) scale(0.6); } }
 @keyframes bob { 50% { transform: translateY(-5px); } }
-.lead { margin: 0; max-width: 42em; color: var(--muted); animation: fadeUp 0.7s 0.7s both; }
-.lead strong { color: var(--text); font-size: 1.25em; font-weight: 900; }
+.ask { margin: 6px 0 10px; font-size: clamp(22px, 5.6vw, 34px); font-weight: 900; line-height: 1.35; animation: fadeUp 0.7s 0.6s both; }
+.ask-q {
+  color: var(--c); text-decoration: none;
+  background: linear-gradient(transparent 70%, color-mix(in srgb, var(--c) 28%, transparent) 0);
+  transition: color 0.3s;
+}
+.ask-q::after { content: ''; display: inline-block; width: 3px; height: 1em; margin-left: 3px; vertical-align: -0.12em; background: currentColor; border-radius: 2px; animation: caret 1s steps(1) infinite; }
+.ask-q.typing::after { animation: none; }
+.ask-q:hover { filter: brightness(1.15); }
+@keyframes caret { 50% { opacity: 0; } }
+/* 長い問いかけは2行になるので、狭い画面では2行分を取っておく(打ち直すたびに下が跳ねないように) */
+@media (max-width: 600px) { .ask { min-height: 2.7em; } }
+.lead { margin: 0; max-width: 42em; color: var(--muted); line-height: 1.8; animation: fadeUp 0.7s 0.8s both; }
 .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; animation: fadeUp 0.7s 0.9s both; }
 .links a {
   padding: 6px 16px; border: 1px solid var(--line); border-radius: 999px;

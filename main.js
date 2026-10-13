@@ -30,12 +30,30 @@ function watchReveal() {
   }, { passive: true });
 }
 
-// ---- 数を数え上げる(見出しの「38 本」) ----
-function countUp() {
-  const el = $('.count'); if (!el || calm) return;
-  const to = +el.dataset.to; const t0 = performance.now();
-  const step = (t) => { const k = Math.min(1, (t - t0) / 1200); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
-  el.textContent = '0'; setTimeout(() => requestAnimationFrame(step), 600);
+// ---- 「今日は、〜？」の問いかけを、アプリを替えながら打ち直す ----
+// 最初の1つ(イチオシ)は HTML に書き出してあるので、JS が無くても読める
+function askRotate() {
+  const q = $('.ask-q'); if (!q) return;
+  const first = q.getAttribute('href');
+  const pool = APPS.filter((a) => a.ask && `apps/${a.id}/` !== first);
+  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+  let n = 0;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const show = (app) => { q.href = `apps/${app.id}/`; q.style.setProperty('--c', app.color ?? '#f5c451'); };
+  (async () => {
+    await sleep(3200);
+    for (;;) {
+      const app = pool[n++ % pool.length];
+      if (calm || document.hidden) { show(app); q.textContent = app.ask; await sleep(4000); continue; }
+      q.classList.add('typing');
+      for (let s = q.textContent; s.length; ) { s = [...s].slice(0, -1).join(''); q.textContent = s; await sleep(35); }
+      show(app);
+      const chars = [...app.ask];
+      for (let k = 1; k <= chars.length; k++) { q.textContent = chars.slice(0, k).join(''); await sleep(85); }
+      q.classList.remove('typing');
+      await sleep(2600);
+    }
+  })();
 }
 
 // ---- カードを指先に向けて少し傾ける(マウスのある端末だけ) ----
@@ -168,7 +186,7 @@ document.addEventListener('click', (e) => {
 });
 
 watchReveal();
-countUp();
+askRotate();
 tilt();
 previews();
 autoplayVideos();
