@@ -31,6 +31,13 @@ export function initAnalytics() {
   document.head.appendChild(s);
 }
 
+// ホーム画面から(アプリとして)起動された
+export function trackPwaLaunch() {
+  if (!enabled) return;
+  queue.push({ path: '📇 アプリ置き場をホーム画面から起動した', title: 'PWA として使われている' });
+  flush();
+}
+
 export function trackOpen(appName) {
   if (!enabled) return;
   queue.push({ path: `📇 → ${appName} を開いた`, title: 'アプリ置き場からアプリを開いた' });

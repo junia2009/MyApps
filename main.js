@@ -2,7 +2,7 @@
 // ここは「絞り込み・検索」と「動き」と「集計」だけを足す(JS が無くても全部読める)。
 
 import { APPS, catOf } from './site.js';
-import { initAnalytics, trackOpen } from './analytics.js';
+import { initAnalytics, trackOpen, trackPwaLaunch } from './analytics.js';
 
 document.documentElement.classList.add('js');
 const $ = (s, el = document) => el.querySelector(s);
@@ -140,6 +140,27 @@ function toast(msg) {
   document.body.append(t); setTimeout(() => t.remove(), 2200);
 }
 
+// ---- PWA: オフライン用の保存と「ホーム画面に追加」 ----
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+function pwa() {
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    // main.js と同じ場所の sw.js。個人ページから読んでもサイトの根を指す
+    navigator.serviceWorker.register(new URL('sw.js', import.meta.url)).catch(() => {});
+  }
+  const btn = $('[data-install]'); if (!btn || standalone) return;
+  let deferred = null;
+  // Android・PC の Chrome / Edge: ボタン1つで追加できる
+  addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferred = e; btn.hidden = false; });
+  addEventListener('appinstalled', () => { btn.hidden = true; toast('ホーム画面に追加しました'); });
+  // iPhone / iPad の Safari: 追加の口が無いので、手順を案内する
+  const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (ios) btn.hidden = false;
+  btn.addEventListener('click', async () => {
+    if (deferred) { deferred.prompt(); await deferred.userChoice.catch(() => {}); deferred = null; btn.hidden = true; return; }
+    if (ios) toast('下の共有ボタン(□↑)→「ホーム画面に追加」で追加できます');
+  });
+}
+
 // ---- どのアプリが開かれたかを数える(匿名) ----
 document.addEventListener('click', (e) => {
   const a = e.target.closest('[data-open]'); if (!a) return;
@@ -154,4 +175,6 @@ autoplayVideos();
 ripples();
 filters();
 share();
+pwa();
 initAnalytics();
+if (standalone) trackPwaLaunch();

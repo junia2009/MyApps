@@ -32,6 +32,11 @@ function head({ title, desc, url, image, root, extra = '' }) {
 <meta name="author" content="${SITE.author}">
 ${SITE.googleVerification ? `<meta name="google-site-verification" content="${SITE.googleVerification}">` : ''}
 <link rel="icon" href="${root}icon.svg" type="image/svg+xml">
+<link rel="manifest" href="${root}manifest.webmanifest">
+<link rel="apple-touch-icon" href="${root}icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="アプリ置き場">
 <meta property="og:site_name" content="${esc(SITE.name)}">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:type" content="website">
@@ -91,6 +96,7 @@ ${sky}
       <a href="${SITE.github}" rel="noopener">GitHub</a>
       ${SITE.qiita ? `<a href="${SITE.qiita}" rel="noopener">Qiita</a>` : ''}
       <a href="#list" class="go">一覧へ ↓</a>
+      <button class="install" type="button" data-install hidden>📲 ホーム画面に追加</button>
     </nav>
   </div>
 </header>
@@ -250,4 +256,69 @@ writeFileSync(join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 ${APPS.map((a) => `  <url><loc>${SITE.base}apps/${a.id}/</loc><lastmod>${a.updated}-01</lastmod></url>`).join('\n')}
 </urlset>
 `);
+// ---------------- PWA ----------------
+// マニフェスト(ホーム画面に追加したときの名前・色・アイコン)
+writeFileSync(join(ROOT, 'manifest.webmanifest'), JSON.stringify({
+  name: SITE.name, short_name: 'アプリ置き場', lang: 'ja',
+  description: `${SITE.author} が作った、ブラウザで動くアプリ ${APPS.length} 本の一覧`,
+  start_url: './', scope: './', display: 'standalone',
+  background_color: '#0b1020', theme_color: '#0b1020',
+  icons: [
+    { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+    { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+    { src: 'icons/maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+    { src: 'icon.svg', sizes: 'any', type: 'image/svg+xml' },
+  ],
+}, null, 2) + '\n');
+
+// Service Worker。最初に開いたとき、ページ・見た目・画面写真をまとめて保存しておく
+// (一度開けば、電波がなくても一覧と紹介ページを読める)。
+// CM 動画(合計で数十 MB)は保存しない ── 毎回ネットワークから流す。
+// キャッシュ名に書き出した時刻を入れるので、書き出し直すたびに入れ替わる。
+const precache = [
+  './', 'style.css', 'main.js', 'site.js', 'apps.js', 'analytics.js', 'icon.svg', 'manifest.webmanifest',
+  'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
+  ...readdirSync(join(ROOT, 'thumbs')).filter((f) => f.endsWith('.webp')).map((f) => `thumbs/${f}`),
+  ...APPS.map((a) => `apps/${a.id}/`),
+];
+writeFileSync(join(ROOT, 'sw.js'), `// scripts/build.mjs が書き出す。手で編集しない
+const CACHE = 'myapps-${ver}';
+const PRECACHE = ${JSON.stringify(precache, null, 2)};
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting()));
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(caches.keys()
+    .then((keys) => Promise.all(keys.filter((k) => k.startsWith('myapps-') && k !== CACHE).map((k) => caches.delete(k))))
+    .then(() => self.clients.claim()));
+});
+
+self.addEventListener('fetch', (e) => {
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  // 動画は Range 要求で少しずつ取るので、手を出さない
+  if (url.pathname.endsWith('.mp4')) return;
+  const sameOrigin = url.origin === self.location.origin;
+  const font = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
+  if (!sameOrigin && !font) return;
+  // ネットワーク優先(更新がすぐ届く)。つながらないときだけ保存分を出す
+  e.respondWith((async () => {
+    const cache = await caches.open(CACHE);
+    try {
+      const res = await fetch(req);
+      if (res.ok && (sameOrigin || font)) cache.put(req, res.clone());
+      return res;
+    } catch {
+      const hit = await cache.match(req, { ignoreSearch: true });
+      if (hit) return hit;
+      if (req.mode === 'navigate') return (await cache.match('./')) ?? Response.error();
+      return Response.error();
+    }
+  })());
+});
+`);
+
 console.log(`書き出し: index.html / apps/*(${APPS.length}) / sitemap.xml ・ CM あり ${APPS.filter((a) => hasCm(a.id)).length} 本`);

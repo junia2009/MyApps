@@ -113,6 +113,8 @@ a { color: var(--accent); }
 }
 .links a:hover { border-color: var(--accent); transform: translateY(-2px); }
 .links .go { animation: nudge 2s 2s ease-in-out infinite; }
+.links .install { padding: 6px 16px; border-radius: 999px; border: 0; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; background: var(--btn); color: var(--btn-text); }
+.links .install[hidden] { display: none; }
 @keyframes nudge { 50% { transform: translateY(3px); } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } }
 
@@ -254,7 +256,7 @@ a { color: var(--accent); }
 .tags.big .tag { font-size: 14px; padding: 4px 12px; border-radius: 999px; }
 .related { padding: 10px 0 0; }
 .back { text-align: center; margin-top: 28px; }
-.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); translate: -50% 0; z-index: 20; padding: 10px 18px; border-radius: 999px; background: var(--chip-on); color: var(--chip-on-text); font-weight: 800; font-size: 14px; animation: fadeUp 0.3s both; }
+.toast { max-width: calc(100% - 32px); text-align: center; position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); translate: -50% 0; z-index: 20; padding: 10px 18px; border-radius: 999px; background: var(--chip-on); color: var(--chip-on-text); font-weight: 800; font-size: 14px; animation: fadeUp 0.3s both; }
 
 /* ---- 足もと ---- */
 .foot { position: relative; z-index: 1; margin-top: 64px; padding: 24px 0 calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }

@@ -10,6 +10,7 @@
 - 名前・説明・技術(例: `three`)で探す
 - 各アプリのカードから、公開先とソースへ飛ぶ
 - スマホ・PC、ダーク・ライトのどちらでも読める
+- PWA: ホーム画面に追加してアプリのように起動できる。一度開けば、電波がなくても一覧と紹介ページを読める(CM 動画は通信で流す)
 
 ## アプリを足すとき
 
@@ -19,7 +20,7 @@
 4. CM があれば `media/<id>/` に `cm.mp4`(縦 720×1280)・`poster.jpg`・`preview.mp4`(カードの試し見)を置いて、もう一度 3 を実行する
 
 イチオシ欄は `apps.js` の `FEATURED` で選ぶ(横長の `thumbs/<id>-wide.webp` を使う)。
-Qiita の記事やプロフィールへのリンクは `main.js` の先頭(`QIITA_PROFILE` / `ARTICLES`)に書くと出る。
+Qiita の記事やプロフィールへのリンクは `site.js` の `SITE.qiita` / `SITE.articles` に書くと出る。
 
 ## 構成
 
@@ -38,6 +39,7 @@ media/<id>/   CM 動画など
 analytics.js  匿名のアクセス集計(GoatCounter、Cookie なし)
 thumbs/       各アプリの画面
 og.png        SNS で共有したときの画像
+manifest.webmanifest・sw.js・icons/  PWA(build.mjs が書き出す。sw.js は手で編集しない)
 ```
 
 ## アクセス集計
