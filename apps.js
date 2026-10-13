@@ -141,11 +141,6 @@ export const APPS = [
     url: GH + 'Home_loan_rate/', tags: ['Next.js', 'TypeScript'],
   },
   {
-    id: 'higashikurume_gomi', name: '東久留米ごみナビ', cat: 'life', updated: '2026-07',
-    desc: '東久留米市のごみ分別検索と収集日カレンダー。今日・明日出せるごみが一目でわかる。',
-    url: GH + 'higashikurume_gomi/', tags: ['JS', 'PWA'],
-  },
-  {
     id: 'used_good_list', name: 'Totte', cat: 'life', updated: '2026-06',
     desc: '日用品のパッケージ写真とメーカーを家族で共有して、買い間違いを防ぐ。',
     url: 'https://used-goods-list.web.app/', tags: ['React', 'Firebase', 'PWA'],

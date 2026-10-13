@@ -15,7 +15,7 @@
 
 1. `apps.js` の `APPS` に1件足す(書き方はファイルの先頭にある)
 2. 画面を撮って `thumbs/<id>.webp` に置く(縦横 3:4、480×640 くらい)
-3. 見出しの「39 本」は `apps.js` の件数から自動で書き換わる
+3. 見出しの本数は `apps.js` の件数から自動で書き換わる
 
 イチオシ欄は `apps.js` の `FEATURED` で選ぶ(横長の `thumbs/<id>-wide.webp` を使う)。
 Qiita の記事やプロフィールへのリンクは `main.js` の先頭(`QIITA_PROFILE` / `ARTICLES`)に書くと出る。
