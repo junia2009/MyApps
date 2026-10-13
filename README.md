@@ -22,7 +22,8 @@ Qiita の記事やプロフィールへのリンクは `main.js` の先頭(`QIIT
 
 ## 構成
 
-ビルドなし。ファイルをそのまま GitHub Pages で配信している。
+ビルドなし。`main` に push すると、GitHub Actions(`.github/workflows/pages.yml`)が
+ファイルをそのまま GitHub Pages に配信する(Settings → Pages の Source は「GitHub Actions」)。
 
 ```
 index.html    ページの骨組み(OGP もここ)
