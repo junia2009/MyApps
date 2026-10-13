@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>junia2009 のアプリ置き場</title>
+  <meta name="description" content="junia2009 が作った、ブラウザで動く個人開発アプリの一覧。ゲーム・癒し・ものづくり・暮らしの便利ツール・CTF 向けツールまで、インストールなしで使えます。">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="junia2009 のアプリ置き場">
+  <meta property="og:description" content="ブラウザで動く個人開発アプリの一覧。インストールなしで遊べます。">
+  <meta property="og:url" content="https://junia2009.github.io/MyApps/">
+  <meta property="og:image" content="https://junia2009.github.io/MyApps/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">junia2009 の個人開発</p>
+      <h1>アプリ置き場</h1>
+      <p class="lead">
+        ブラウザで動くアプリを <strong id="count">39</strong> 本作りました。
+        どれもインストールなしで、スマホからそのまま使えます。
+        気に入ったものはホーム画面に追加すると、アプリのように起動できます。
+      </p>
+      <nav class="links">
+        <a href="https://github.com/junia2009" rel="noopener">GitHub</a>
+        <a id="qiita-link" href="#" rel="noopener" hidden>Qiita</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="featured" class="featured" aria-label="イチオシ"></section>
+
+    <section aria-label="アプリ一覧">
+      <div class="controls">
+        <div class="chips" id="chips" role="tablist" aria-label="分類"></div>
+        <label class="search">
+          <span class="sr-only">アプリを探す</span>
+          <input id="q" type="search" placeholder="名前・説明・技術で探す" autocomplete="off">
+        </label>
+      </div>
+      <p class="result" id="result" aria-live="polite"></p>
+      <ul class="grid" id="grid"></ul>
+      <p class="empty" id="empty" hidden>見つかりませんでした。別のことばで探してみてください。</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p>© junia2009 ・ このページも GitHub Pages で公開しています(<a href="https://github.com/junia2009/MyApps" rel="noopener">ソース</a>)</p>
+      <p class="note">匿名のアクセス数だけを <a href="https://www.goatcounter.com/" rel="noopener">GoatCounter</a> で数えています(Cookie なし)。</p>
+    </div>
+  </footer>
+</body>
+</html>
