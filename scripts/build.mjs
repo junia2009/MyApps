@@ -36,7 +36,7 @@ ${SITE.googleVerification ? `<meta name="google-site-verification" content="${SI
 <link rel="apple-touch-icon" href="${root}icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="アプリ置き場">
+<meta name="apple-mobile-web-app-title" content="junia lab">
 <meta property="og:site_name" content="${esc(SITE.name)}">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:type" content="website">
@@ -86,7 +86,7 @@ ${sky}
 <header class="hero">
   <div class="wrap">
     <p class="eyebrow">${SITE.author} の個人開発</p>
-    <h1 class="title" aria-label="アプリ置き場">${[...'アプリ置き場'].map((ch, i) => `<span style="--i:${i}" aria-hidden="true">${ch}</span>`).join('')}</h1>
+    <h1 class="title" aria-label="junia lab">${[...'junia lab'].map((ch, i) => `<span style="--i:${i}" aria-hidden="true">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('')}</h1>
     <p class="lead">
       ブラウザで動くアプリを <strong class="count" data-to="${APPS.length}">${APPS.length}</strong> 本作りました。
       どれもインストールなしで、スマホからそのまま使えます。
@@ -259,7 +259,7 @@ ${APPS.map((a) => `  <url><loc>${SITE.base}apps/${a.id}/</loc><lastmod>${a.updat
 // ---------------- PWA ----------------
 // マニフェスト(ホーム画面に追加したときの名前・色・アイコン)
 writeFileSync(join(ROOT, 'manifest.webmanifest'), JSON.stringify({
-  name: SITE.name, short_name: 'アプリ置き場', lang: 'ja',
+  name: SITE.name, short_name: 'junia lab', lang: 'ja',
   description: `${SITE.author} が作った、ブラウザで動くアプリ ${APPS.length} 本の一覧`,
   start_url: './', scope: './', display: 'standalone',
   background_color: '#0b1020', theme_color: '#0b1020',

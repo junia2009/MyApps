@@ -1,4 +1,4 @@
-# MyApps — junia2009 のアプリ置き場
+# junia lab — junia2009 の個人開発アプリ
 
 自分で作ったアプリを紹介するページ。ブラウザで動く個人開発アプリを一覧にしている。
 
@@ -45,4 +45,4 @@ manifest.webmanifest・sw.js・icons/  PWA(build.mjs が書き出す。sw.js は
 ## アクセス集計
 
 [GoatCounter](https://www.goatcounter.com/) で、このページを開いた数と、どのアプリへ進んだかだけを数えている。
-集計画面では `📇` から始まる行がこのページのもの。手元(localhost)では数えない。
+集計画面では `🧪` から始まる行がこのページのもの。手元(localhost)では数えない。

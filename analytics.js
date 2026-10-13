@@ -1,15 +1,15 @@
 // 匿名のアクセス集計(GoatCounter)。Hexfrontier と同じ集計画面に出す。
 //
 // 集計画面ではパスが大きく出るので、日本語で「何が起きたか」を送る。
-// 先頭の 📇 が、このページ(アプリ置き場)から来た行の印。
-//   📇 アプリ置き場を開いた
-//   📇 → Hexfrontier を開いた
+// 先頭の 🧪 が、このページ(junia lab)から来た行の印。
+//   🧪 junia lab を開いた
+//   🧪 → Hexfrontier を開いた
 // 送るのはアプリの名前(apps.js に書いた固定の値)だけ。Cookie は使わない。
 // 手元の確認(localhost / ファイル直開き)と自動テスト(navigator.webdriver)では数えない。
 
 const ENDPOINT = 'https://hexfrontier.goatcounter.com/count';
 const SCRIPT = 'https://gc.zgo.at/count.js';
-const PAGEVIEW = { path: '📇 アプリ置き場を開いた', title: 'アプリ置き場(MyApps)のトップ' };
+const PAGEVIEW = { path: '🧪 junia lab を開いた', title: 'junia lab(MyApps)のトップ' };
 
 let enabled = false;
 const queue = [];
@@ -34,13 +34,13 @@ export function initAnalytics() {
 // ホーム画面から(アプリとして)起動された
 export function trackPwaLaunch() {
   if (!enabled) return;
-  queue.push({ path: '📇 アプリ置き場をホーム画面から起動した', title: 'PWA として使われている' });
+  queue.push({ path: '🧪 junia lab をホーム画面から起動した', title: 'PWA として使われている' });
   flush();
 }
 
 export function trackOpen(appName) {
   if (!enabled) return;
-  queue.push({ path: `📇 → ${appName} を開いた`, title: 'アプリ置き場からアプリを開いた' });
+  queue.push({ path: `🧪 → ${appName} を開いた`, title: 'junia lab からアプリを開いた' });
   flush();
 }
 

@@ -4,7 +4,7 @@
 import { APPS, CATEGORIES, repoUrl } from './apps.js';
 
 export const SITE = {
-  name: 'junia2009 のアプリ置き場',
+  name: 'junia lab',
   base: 'https://junia2009.github.io/MyApps/',
   author: 'junia2009',
   // Google Search Console の所有権の確認
