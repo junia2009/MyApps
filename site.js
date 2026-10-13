@@ -7,6 +7,8 @@ export const SITE = {
   name: 'junia2009 のアプリ置き場',
   base: 'https://junia2009.github.io/MyApps/',
   author: 'junia2009',
+  // Google Search Console の所有権の確認
+  googleVerification: '8ZyND1Ku-veyU-mxRLHPgO6U8lg9MsXpHRgqj-qspWU',
   github: 'https://github.com/junia2009',
   // Qiita のプロフィールと記事。入れると見出し・イチオシ・個人ページにリンクが出る
   qiita: '',

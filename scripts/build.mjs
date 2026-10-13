@@ -30,6 +30,7 @@ function head({ title, desc, url, image, root, extra = '' }) {
 <link rel="canonical" href="${url}">
 <meta name="theme-color" content="#0b1020">
 <meta name="author" content="${SITE.author}">
+${SITE.googleVerification ? `<meta name="google-site-verification" content="${SITE.googleVerification}">` : ''}
 <link rel="icon" href="${root}icon.svg" type="image/svg+xml">
 <meta property="og:site_name" content="${esc(SITE.name)}">
 <meta property="og:locale" content="ja_JP">
