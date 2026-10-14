@@ -1,5 +1,5 @@
 // scripts/build.mjs が書き出す。手で編集しない
-const CACHE = 'myapps-mv6tkp0z';
+const CACHE = 'myapps-mv7e01kh';
 const PRECACHE = [
   "./",
   "style.css",

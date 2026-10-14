@@ -270,6 +270,13 @@ a { color: var(--accent); }
 .toast { max-width: calc(100% - 32px); text-align: center; position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); translate: -50% 0; z-index: 20; padding: 10px 18px; border-radius: 999px; background: var(--chip-on); color: var(--chip-on-text); font-weight: 800; font-size: 14px; animation: fadeUp 0.3s both; }
 
 /* ---- 足もと ---- */
+.fan { margin: 12px 0 0; font-size: 13px; color: var(--muted); animation: fadeUp 0.7s 0.9s both; }
+.fan a { color: inherit; margin-left: 4px; white-space: nowrap; }
+.about { margin-top: 56px; scroll-margin-top: 140px; padding: 22px 22px 14px; border: 1px dashed var(--line); border-radius: 20px; background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.about h2 { margin: 0 0 8px; font-size: 18px; }
+.about p { margin: 0 0 8px; }
+.about ul { margin: 0; padding-left: 1.2em; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.about strong { color: var(--text); }
 .foot { position: relative; z-index: 1; margin-top: 64px; padding: 24px 0 calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 .foot p { margin: 4px 0; }
 

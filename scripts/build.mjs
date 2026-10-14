@@ -55,6 +55,7 @@ ${extra}`;
 const footer = (root) => `<footer class="foot">
   <div class="wrap">
     <p>© ${SITE.author} ・ このページも GitHub Pages で公開しています(<a href="https://github.com/junia2009/MyApps" rel="noopener">ソース</a>)</p>
+    <p class="note">ここにあるのは個人のファン作品・非公式の作品で、本家・原作の権利者や公式とは関係ありません。</p>
     <p class="note">匿名のアクセス数だけを <a href="https://www.goatcounter.com/" rel="noopener">GoatCounter</a> で数えています(Cookie なし)。</p>
   </div>
 </footer>`;
@@ -89,6 +90,7 @@ ${sky}
     <h1 class="title" aria-label="junia lab">${[...'junia lab'].map((ch, i) => `<span style="--i:${i}" aria-hidden="true">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('')}</h1>
     <p class="ask">今日は、<a class="ask-q" href="apps/${f.id}/" style="--c:${f.color ?? '#f5c451'}">${esc(f.ask)}</a></p>
     <p class="lead">深海でオセロ、宇宙でソリティア、夜空に花火。<br>ぜんぶ、タップひとつで始まります。</p>
+    <p class="fan">🎈 ファンが楽しむために作った、非公式の作品集です。<a href="#about">くわしく</a></p>
     <nav class="links">
       <a href="${SITE.github}" rel="noopener">GitHub</a>
       ${SITE.qiita ? `<a href="${SITE.qiita}" rel="noopener">Qiita</a>` : ''}
@@ -130,6 +132,17 @@ ${sky}
 ${list.map((a) => cardHtml(a, { media })).join('\n')}
     </ul>
     <p class="empty" id="empty" hidden>見つかりませんでした。別のことばで探してみてください。</p>
+  </section>
+
+  <section class="about reveal" id="about" aria-labelledby="about-h">
+    <h2 id="about-h">🎈 このサイトについて</h2>
+    <p>ここに並んでいるのは、${esc(SITE.author)} が<strong>楽しむために個人で作ったファン作品</strong>です。</p>
+    <ul>
+      <li>元になったゲームや作品(本家・原作・公式)がある場合も、その会社・権利者・公式とは<strong>一切関係のない非公式の作品</strong>です。</li>
+      <li>作品名・商標などの権利は、それぞれの権利者に帰属します。</li>
+      <li>営利目的ではありません。本家へのお問い合わせはご遠慮ください。</li>
+      <li>問題があれば <a href="${SITE.github}" rel="noopener">GitHub</a> からお知らせください。すぐに対応します。</li>
+    </ul>
   </section>
 </main>
 ${footer('')}
